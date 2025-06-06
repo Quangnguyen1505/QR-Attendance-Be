@@ -18,6 +18,7 @@ export class AttendanceLogService {
    * @returns A message indicating that a new attendance log has been added.
    */
   async create(createAttendanceLogDto: CreateAttendanceLogDto) {
+    console.log('Creating attendance log with data:', createAttendanceLogDto);
     let employee: Employee | null = null;
     employee = await this.employeeService.findQrCode(
       createAttendanceLogDto.code,
