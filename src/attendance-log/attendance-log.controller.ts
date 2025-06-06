@@ -15,7 +15,7 @@ import { UpdateAttendanceLogDto } from './dto/update-attendance-log.dto';
 export class AttendanceLogController {
   constructor(private readonly attendanceLogService: AttendanceLogService) {}
 
-  @Post()
+  @Post('scan')
   create(@Body() createAttendanceLogDto: CreateAttendanceLogDto) {
     return this.attendanceLogService.create(createAttendanceLogDto);
   }
