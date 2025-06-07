@@ -42,7 +42,14 @@ export class AttendanceLogService {
   }
 
   findAll() {
-    return this.prisma.attendanceLog.findMany();
+    return this.prisma.attendanceLog.findMany({
+      include: {
+        employee: true,
+      },
+      orderBy: {
+        scannedAt: 'desc', // tùy chọn: sắp xếp theo thời gian quét
+      },
+    });
   }
 
   findOne(id: string) {

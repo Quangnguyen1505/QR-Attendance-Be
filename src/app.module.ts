@@ -6,6 +6,7 @@ import { AttendanceLogModule } from './attendance-log/attendance-log.module';
 import { ConfigModule } from '@nestjs/config';
 import { QrService } from './qr/qr.service';
 import { QrModule } from './qr/qr.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { QrModule } from './qr/qr.module';
     EmployeeModule,
     AttendanceLogModule,
     QrModule,
+    AuthModule,
   ],
   providers: [QrService],
 })

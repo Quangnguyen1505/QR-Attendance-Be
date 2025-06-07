@@ -1,19 +1,19 @@
 services:
-  app: 
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: qr-attendance-app
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/attendance_db
-      - PORT=8000
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres
-    restart: always
-    networks:
-      - qr-attendance-network
+  # app: 
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: qr-attendance-app
+  #   environment:
+  #     - DATABASE_URL=postgres://postgres:postgres@postgres:5432/attendance_db
+  #     - PORT=8000
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgres
+  #   restart: always
+  #   networks:
+  #     - qr-attendance-network
   postgres:
     image: postgres:latest
     container_name: postgres

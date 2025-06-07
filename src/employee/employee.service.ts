@@ -25,6 +25,9 @@ export class EmployeeService {
       where: {
         id,
       },
+      include: {
+        logs: true,
+      },
     });
   }
 
