@@ -47,7 +47,7 @@ export class AttendanceLogService {
         employee: true,
       },
       orderBy: {
-        scannedAt: 'desc', // tùy chọn: sắp xếp theo thời gian quét
+        scannedAt: 'desc',
       },
     });
   }
@@ -56,6 +56,9 @@ export class AttendanceLogService {
     return this.prisma.attendanceLog.findUnique({
       where: {
         id,
+      },
+      include: {
+        employee: true,
       },
     });
   }
