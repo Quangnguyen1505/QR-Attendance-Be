@@ -42,6 +42,12 @@ export class AuthService {
       }
 
       const token = jwt.sign(payload, jwtSecret, { expiresIn: '10m' });
+      console.log('Generated JWT token:', token);
+
+      await this.prisma.user.update({
+        where: { id: user.id },
+        data: { token },
+      });
 
       return {
         access_token: token,
