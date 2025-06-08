@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 
 import { PrismaModule } from './prisma/prisma.module';
 import { EmployeeModule } from './employee/employee.module';
@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { QrService } from './qr/qr.service';
 import { QrModule } from './qr/qr.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthMiddleware } from './common/middleware/auth.middleware';
 
 @Module({
   imports: [
@@ -21,4 +22,10 @@ import { AuthModule } from './auth/auth.module';
   ],
   providers: [QrService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes({ path: 'auth/change-password', method: RequestMethod.POST });
+  }
+}
