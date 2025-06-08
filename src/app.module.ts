@@ -8,6 +8,9 @@ import { QrService } from './qr/qr.service';
 import { QrModule } from './qr/qr.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthMiddleware } from './common/middleware/auth.middleware';
+import { AuthController } from './auth/auth.controller';
+import { AttendanceLogController } from './attendance-log/attendance-log.controller';
+import { EmployeeController } from './employee/employee.controller';
 
 @Module({
   imports: [
@@ -26,6 +29,11 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .forRoutes({ path: 'auth/change-password', method: RequestMethod.POST });
+      .exclude(
+        { path: 'auth/change-password', method: RequestMethod.POST },
+        { path: 'qr/generate', method: RequestMethod.POST },
+        { path: 'attendance-log/scan', method: RequestMethod.POST },
+      )
+      .forRoutes(AuthController, AttendanceLogController, EmployeeController);
   }
 }
