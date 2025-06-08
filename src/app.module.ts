@@ -30,7 +30,7 @@ export class AppModule {
     consumer
       .apply(AuthMiddleware)
       .exclude(
-        { path: 'auth/change-password', method: RequestMethod.POST },
+        { path: 'auth/login', method: RequestMethod.POST },
         { path: 'qr/generate', method: RequestMethod.POST },
         { path: 'attendance-log/scan', method: RequestMethod.POST },
       )
