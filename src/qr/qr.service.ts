@@ -10,8 +10,11 @@ export class QrService {
 
   async generateQrCode(data: CreateQRDto): Promise<string> {
     const secret = this.configService.get<string>('JWT_SECRET');
-    if (!secret) {
-      throw new Error('JWT secret is not defined in environment variables');
+    const urlFrontend = this.configService.get<string>('URL_FRONTEND');
+    if (!secret || !urlFrontend) {
+      throw new Error(
+        'JWT secret or frontend URL is not defined in environment variables',
+      );
     }
     const payload = {
       code: data.code,
@@ -23,7 +26,7 @@ export class QrService {
 
     const token = jwt.sign(payload, secret, { expiresIn: '10m' });
     console.log('Generated JWT token:', token);
-    const qrContent = `https://your-client.com/attendance?token=${token}`;
+    const qrContent = `${urlFrontend}/attendance?token=${token}`;
     const qrBase64 = await QRCode.toDataURL(qrContent);
     return qrBase64;
   }
